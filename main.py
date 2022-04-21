@@ -59,6 +59,7 @@ def processUploadFiles(filename,filesize,files,update,bot,message,thread=None,jd
                                   user_info['moodle_password'],
                                   user_info['moodle_host'],
                                   user_info['moodle_repo_id'],
+                                  user_info['moodle_userid'],
                                   proxy=proxy)
             loged = client.login()
             itererr = 0
