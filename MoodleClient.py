@@ -44,7 +44,7 @@ class CallingUpload:
                             self.speed = 0
 
 class MoodleClient(object):
-    def __init__(self, user,passw,host='',repo_id=4,proxy:ProxyCloud=None):
+    def __init__(self, user,userid,passw,host='',repo_id=4,proxy:ProxyCloud=None):
         self.username = user
         self.password = passw
         self.session = requests.Session()
@@ -53,7 +53,7 @@ class MoodleClient(object):
         if host!='':
             self.path = host
         self.userdata = None
-        self.userid = ''
+        self.userid = userid
         self.repo_id = repo_id
         self.sesskey = ''
         self.proxy = None
@@ -359,7 +359,7 @@ class MoodleClient(object):
             return None,None
 
     def upload_file_perfil(self,file,progressfunc=None,args=(),tokenize=False):
-            file_edit = f'{self.path}user/edit.php?id=7338&returnto=profile'
+            file_edit = f'{self.path}user/edit.php?id={self.userid}&returnto=profile'
             #https://eduvirtual.uho.edu.cu/user/profile.php
             resp = self.session.get(file_edit,proxies=self.proxy)
             soup = BeautifulSoup(resp.text, 'html.parser')
@@ -420,7 +420,7 @@ class MoodleClient(object):
             return None,data
 
     def upload_file_draft(self,file,progressfunc=None,args=(),tokenize=False):
-            file_edit = f'{self.path}user/edit.php?id=7338&returnto=profile'
+            file_edit = f'{self.path}user/edit.php?id={self.userid}&returnto=profile'
             #https://eduvirtual.uho.edu.cu/user/profile.php
             resp = self.session.get(file_edit,proxies=self.proxy)
             soup = BeautifulSoup(resp.text, 'html.parser')
